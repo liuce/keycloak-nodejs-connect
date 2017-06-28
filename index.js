@@ -202,8 +202,9 @@ Keycloak.prototype.protect = function (spec) {
  *
  * @param {Object} request The HTTP request.
  */
-Keycloak.prototype.authenticated = function (request) {
+Keycloak.prototype.authenticated = function (request, callback) {
   // no-op
+  callback();
 };
 
 /**

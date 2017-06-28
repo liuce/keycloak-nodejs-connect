@@ -41,12 +41,10 @@ module.exports = function (keycloak) {
         let cleanUrl = URL.format(urlParts);
 
         request.kauth.grant = grant;
-        try {
-          keycloak.authenticated(request);
-        } catch (err) {
-          console.log(err);
-        }
-        response.redirect(cleanUrl);
+        keycloak.authenticated(request, function(err){
+          if(err) console.log(err);
+          response.redirect(cleanUrl);
+        });
       }).catch((err) => {
         keycloak.accessDenied(request, response);
         console.error('Could not obtain grant code: ' + err);
